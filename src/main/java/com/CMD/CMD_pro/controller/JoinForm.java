@@ -1,7 +1,11 @@
 package com.CMD.CMD_pro.controller;
 
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
 public class JoinForm {
-    private int user_index;
     private String user_id;
     private String user_pwd;
     private String user_name;
@@ -10,13 +14,7 @@ public class JoinForm {
     private String user_email;
     private String user_gender;
 
-    public int getUser_index() {
-        return user_index;
-    }
-    public void setUser_index(int user_index) {
-        this.user_index = user_index;
-    }
-    public String getUser_id() {
+    /*public String getUser_id() {
         return user_id;
     }
     public void setUser_id(String user_id) {
@@ -57,5 +55,5 @@ public class JoinForm {
     }
     public void setUser_gender(String user_gender) {
         this.user_gender = user_gender;
-    }
+    }*/
 }

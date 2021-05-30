@@ -1,6 +1,11 @@
 package com.CMD.CMD_pro.domain;
 
-public class userVO {
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
+public class UserVO {
     private int user_index;
     private String user_id;
     private String user_pwd;
@@ -11,9 +16,7 @@ public class userVO {
     private String user_gender;
     private String user_profile;
 
-    public int getUser_index() {
-        return user_index;
-    }
+    /*public int getUser_index() { return user_index; }
     public void setUser_index(int user_index) {
         this.user_index = user_index;
     }
@@ -64,5 +67,5 @@ public class userVO {
     }
     public void setUser_profile(String user_profile) {
         this.user_profile = user_profile;
-    }
+    }*/
 }
