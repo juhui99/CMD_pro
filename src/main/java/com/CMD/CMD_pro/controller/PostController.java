@@ -8,27 +8,30 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.List;
 
 @Controller
-@RequestMapping("/post")
 public class PostController {
     @Autowired
     private PostMapper postMapper;
 
-    @RequestMapping("/")
-    public String post(){return "post";}
+    /*@RequestMapping("/")
+    public String post(){return "post";}*/
 
-    @RequestMapping("/post")
+    @PostMapping("/post")
+    //@ResponseBody
     public String main(Model model) throws Exception{
 
         List<PostVO> list = postMapper.selectPostList();
 
-        for(int i = 0; i < list.size(); i++){
+        /*for(int i = 0; i < list.size(); i++){
             System.out.println("title : " + list.get(i).getPost_title());
             System.out.println("content : " + list.get(i).getPost_content());
-        }
-        return "redirect:/post";
+        }*/
+
+        model.addAttribute("list",list);
+        return "post";
     }
 }

@@ -1,20 +1,20 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>select page</title>
     <script src="http://code.jquery.com/jquery-3.1.1.min.js"></script>
 </head>
 <body>
-<form action="/JoinAction" method="post" onsubmit="return submitAction();">
-    <h2>게 시 판</h2>
-    <div class="form-group">
-        <label for="post_title">*제목</label>
-        <input type="text" id="post_title" name="post_title" placeholder="제목">
-        <label for="post_content">*내용</label>
-        <input type="text" id="post_content" name="post_content" placeholder="내용">
-        <input type="submit" id="submit" name="submit" value="가입" >
-    </div>
+<form action="/post" method="post" onsubmit="return submitAction();">
+    <h2>게시판</h2>
+    <tr th:each="list: ${list}">
+        <td th:text="${list.user_name}"></td>
+        <td th:text="${list.post_title}"></td>
+        <td th:text="${list.post_content}"></td>
+    </tr>
 </form>
 </body>
 </html>
