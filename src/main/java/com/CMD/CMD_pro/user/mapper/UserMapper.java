@@ -1,6 +1,6 @@
-package com.CMD.CMD_pro.mapper;
+package com.CMD.CMD_pro.user.mapper;
 
-import com.CMD.CMD_pro.domain.UserVO;
+import com.CMD.CMD_pro.user.domain.UserVO;
 import org.springframework.stereotype.Repository;
 
 @Repository

@@ -1,6 +1,6 @@
-package com.CMD.CMD_pro.mapper;
+package com.CMD.CMD_pro.post.mapper;
 
-import com.CMD.CMD_pro.domain.PostVO;
+import com.CMD.CMD_pro.post.domain.PostVO;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;

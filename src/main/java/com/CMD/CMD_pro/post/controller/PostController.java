@@ -1,7 +1,7 @@
-package com.CMD.CMD_pro.controller;
+package com.CMD.CMD_pro.post.controller;
 
-import com.CMD.CMD_pro.domain.PostVO;
-import com.CMD.CMD_pro.mapper.PostMapper;
+import com.CMD.CMD_pro.post.domain.PostVO;
+import com.CMD.CMD_pro.post.mapper.PostMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

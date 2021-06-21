@@ -1,7 +1,8 @@
-package com.CMD.CMD_pro.controller;
+package com.CMD.CMD_pro.user.controller;
 
-import com.CMD.CMD_pro.domain.UserVO;
-import com.CMD.CMD_pro.mapper.UserMapper;
+import com.CMD.CMD_pro.post.domain.JoinForm;
+import com.CMD.CMD_pro.user.domain.UserVO;
+import com.CMD.CMD_pro.user.mapper.UserMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -21,13 +22,13 @@ public class UserController {
     @PostMapping("/JoinAction")
     public String joinAction(JoinForm form) throws Exception{
         UserVO user = new UserVO();
-        user.setUser_id(form.getUser_id());
-        user.setUser_pwd(form.getUser_pwd());
-        user.setUser_name(form.getUser_name());
-        user.setUser_age(form.getUser_age());
-        user.setUser_major(form.getUser_major());
-        user.setUser_email(form.getUser_email());
-        user.setUser_gender(form.getUser_gender());
+        user.setUser_id(form.getUserId());
+        user.setUser_pwd(form.getUserPwd());
+        user.setUser_name(form.getUserName());
+        user.setUser_age(form.getUserAge());
+        user.setUser_major(form.getUserMajor());
+        user.setUser_email(form.getUserEmail());
+        user.setUser_gender(form.getUserGender());
         userMapper.userJoin(user);
         return "redirect:/join";
     }
