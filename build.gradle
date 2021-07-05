@@ -2,7 +2,14 @@ plugins {
 	id 'org.springframework.boot' version '2.3.11.RELEASE'
 	id 'io.spring.dependency-management' version '1.0.11.RELEASE'
 	id 'java'
+	id 'org.flywaydb.flyway' version '7.10.0'
+
 }
+
+configurations {
+	flywayMigration
+}
+
 
 group = 'com.CMD'
 version = '0.0.1-SNAPSHOT'
@@ -18,6 +25,13 @@ dependencies {
 
 	// https://mvnrepository.com/artifact/org.projectlombok/lombok
 	compileOnly group: 'org.projectlombok', name: 'lombok', version: '1.18.20'
+
+	// https://mvnrepository.com/artifact/mysql/mysql-connector-java
+	implementation group: 'mysql', name: 'mysql-connector-java', version: '8.0.25'
+
+
+	// https://mvnrepository.com/artifact/org.flywaydb/flyway-core
+	implementation group: 'org.flywaydb', name: 'flyway-core', version: '7.10.0'
 
 	compile('org.springframework.boot:spring-boot-starter-jdbc')
 	compile('mysql:mysql-connector-java')
@@ -35,4 +49,38 @@ dependencies {
 
 test {
 	useJUnitPlatform()
+}
+// we need to build classes before we can migrate
+flywayMigrate.dependsOn classes
+
+task local_clean(type: org.flywaydb.gradle.task.FlywayCleanTask) {
+	driver = 'com.mysql.cj.jdbc.Driver'
+	url = 'jdbc:mysql://localhost:3306/cmd_db?autoReconnect=true'
+	user = 'root'
+	password = '02010850'
+}
+
+task local_migrate(type: org.flywaydb.gradle.task.FlywayMigrateTask) {
+	driver = 'com.mysql.cj.jdbc.Driver'
+	url = 'jdbc:mysql://localhost:3306/cmd_db?autoReconnect=true'
+	user = 'root'
+	password = '02010850'
+    locations = ['classpath:db/migration']
+}
+
+ext.profile = (!project.hasProperty('profile') || !profile) ? 'local' : profile
+sourceSets {
+	if ("$profile" == 'local') {
+		main {
+			resources {
+				srcDirs "src/main/resources-common/", "src/main/resources/"
+			}
+		}
+	} else {
+		main {
+			resources {
+				srcDirs "src/main/resources-common/", "src/main/resources-$profile/"
+			}
+		}
+	}
 }

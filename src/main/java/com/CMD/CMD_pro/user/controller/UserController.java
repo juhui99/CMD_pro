@@ -22,13 +22,13 @@ public class UserController {
     @PostMapping("/JoinAction")
     public String joinAction(JoinForm form) throws Exception{
         UserVO user = new UserVO();
-        user.setUser_id(form.getUserId());
-        user.setUser_pwd(form.getUserPwd());
-        user.setUser_name(form.getUserName());
-        user.setUser_age(form.getUserAge());
-        user.setUser_major(form.getUserMajor());
-        user.setUser_email(form.getUserEmail());
-        user.setUser_gender(form.getUserGender());
+        user.setUserId(form.getUserId());
+        user.setUserPwd(form.getUserPwd());
+        user.setUserName(form.getUserName());
+        user.setUserAge(form.getUserAge());
+        user.setUserMajor(form.getUserMajor());
+        user.setUserEmail(form.getUserEmail());
+        user.setUserGender(form.getUserGender());
         userMapper.userJoin(user);
         return "redirect:/join";
     }
