@@ -67,20 +67,3 @@ task local_migrate(type: org.flywaydb.gradle.task.FlywayMigrateTask) {
 	password = '02010850'
     locations = ['classpath:db/migration']
 }
-
-ext.profile = (!project.hasProperty('profile') || !profile) ? 'local' : profile
-sourceSets {
-	if ("$profile" == 'local') {
-		main {
-			resources {
-				srcDirs "src/main/resources-common/", "src/main/resources/"
-			}
-		}
-	} else {
-		main {
-			resources {
-				srcDirs "src/main/resources-common/", "src/main/resources-$profile/"
-			}
-		}
-	}
-}
