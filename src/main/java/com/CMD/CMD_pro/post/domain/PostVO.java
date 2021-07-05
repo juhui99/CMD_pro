@@ -1,11 +1,9 @@
 package com.CMD.CMD_pro.post.domain;
 
-import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 import java.util.Date;
 
-@Data
 @Getter
 @Setter
 public class PostVO {

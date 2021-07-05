@@ -9,4 +9,22 @@ import java.util.List;
 public interface PostMapper {
 
     public List<PostVO> selectPostList() throws Exception;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 }
