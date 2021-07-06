@@ -55,15 +55,14 @@ flywayMigrate.dependsOn classes
 
 task local_clean(type: org.flywaydb.gradle.task.FlywayCleanTask) {
 	driver = 'com.mysql.cj.jdbc.Driver'
-	url = 'jdbc:mysql://localhost:3306/cmd_db?autoReconnect=true'
+	url = 'jdbc:mysql://localhost:33301/cmd_db?autoReconnect=true'
 	user = 'root'
 	password = '02010850'
 }
 
 task local_migrate(type: org.flywaydb.gradle.task.FlywayMigrateTask) {
 	driver = 'com.mysql.cj.jdbc.Driver'
-	url = 'jdbc:mysql://localhost:3306/cmd_db?autoReconnect=true'
+	url = 'jdbc:mysql://localhost:33301/cmd_db?autoReconnect=true'
 	user = 'root'
 	password = '02010850'
-    locations = ['classpath:db/migration']
 }
