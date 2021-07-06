@@ -13,7 +13,7 @@ import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import javax.sql.DataSource;
 
 @SpringBootApplication
-@MapperScan(value = {"com.CMD.CMD_pro.mapper"})
+@MapperScan(basePackages = {"com.CMD.CMD_pro"}, value = {"com.CMD.CMD_pro.mapper"})
 public class CmdProApplication {
 
 	public static void main(String[] args) {
@@ -26,7 +26,7 @@ public class CmdProApplication {
 		SqlSessionFactoryBean sessionFactory = new SqlSessionFactoryBean();
 		sessionFactory.setDataSource(dataSource);
 
-		Resource[] res = new PathMatchingResourcePatternResolver().getResources("classpath:mappers/**Mapper.xml");
+		Resource[] res = new PathMatchingResourcePatternResolver().getResources("classpath:*/mapper/**Mapper.xml");
 		sessionFactory.setMapperLocations(res);
 		return sessionFactory.getObject();
 	}

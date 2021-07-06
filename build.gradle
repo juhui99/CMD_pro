@@ -2,7 +2,7 @@ plugins {
 	id 'org.springframework.boot' version '2.3.11.RELEASE'
 	id 'io.spring.dependency-management' version '1.0.11.RELEASE'
 	id 'java'
-	id 'org.flywaydb.flyway' version '7.10.0'
+	id "org.flywaydb.flyway" version "6.5.5"
 
 }
 
@@ -28,10 +28,6 @@ dependencies {
 
 	// https://mvnrepository.com/artifact/mysql/mysql-connector-java
 	implementation group: 'mysql', name: 'mysql-connector-java', version: '8.0.25'
-
-
-	// https://mvnrepository.com/artifact/org.flywaydb/flyway-core
-	implementation group: 'org.flywaydb', name: 'flyway-core', version: '7.10.0'
 
 	compile('org.springframework.boot:spring-boot-starter-jdbc')
 	compile('mysql:mysql-connector-java')
