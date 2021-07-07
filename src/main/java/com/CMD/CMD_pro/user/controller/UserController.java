@@ -1,6 +1,6 @@
 package com.CMD.CMD_pro.user.controller;
 
-import com.CMD.CMD_pro.post.domain.JoinForm;
+import com.CMD.CMD_pro.user.domain.JoinForm;
 import com.CMD.CMD_pro.user.domain.UserVO;
 import com.CMD.CMD_pro.user.mapper.UserMapper;
 import org.springframework.beans.factory.annotation.Autowired;
