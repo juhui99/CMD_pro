@@ -1,4 +1,5 @@
-#CMD_PRO
+# CMD_PRO
+이거 왜 안댔지 흠...
 
 졸업 논문
 ## Synopsys
@@ -6,7 +7,7 @@
 
 
 
-## Dev Spec
+## Dev Spec``
 - Java 11
 - Gradle 
 - FlyWay 6.5.5
@@ -23,3 +24,8 @@ docker-compose up # mysql docker run
 
 ## 주요 기능 기타등등
 
+
+
+```java
+int x = 0;
+```
