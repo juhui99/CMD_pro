@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RestController
+@Controller
 @Slf4j
 public class PostController {
     @Autowired
@@ -22,7 +22,7 @@ public class PostController {
     @PostMapping("/post")
     //@ResponseBody
     //@RequestMapping(value="/post" , method = {RequestMethod.GET, RequestMethod.POST})
-    public String main(Model model) throws Exception{
+    public String main(Model model) throws Exception {
 
         List<PostVO> list = postMapper.selectPostList();
         log.info("주희 테스트");

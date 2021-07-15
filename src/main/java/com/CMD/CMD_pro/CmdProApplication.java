@@ -22,7 +22,7 @@ public class CmdProApplication {
 	}
 
 	@Bean
-	public SqlSessionFactory sqlSessionFactory(DataSource dataSource)throws Exception {
+	public SqlSessionFactory sqlSessionFactory(DataSource dataSource) throws Exception {
 		SqlSessionFactoryBean sessionFactory = new SqlSessionFactoryBean();
 		sessionFactory.setDataSource(dataSource);
 
