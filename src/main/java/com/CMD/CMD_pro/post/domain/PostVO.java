@@ -20,5 +20,4 @@ public class PostVO {
     private int postHit;
     private int postLike;
     private String postFile;
-
 }

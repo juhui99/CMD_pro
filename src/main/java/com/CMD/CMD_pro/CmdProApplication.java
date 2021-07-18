@@ -26,7 +26,7 @@ public class CmdProApplication {
 		SqlSessionFactoryBean sessionFactory = new SqlSessionFactoryBean();
 		sessionFactory.setDataSource(dataSource);
 
-		Resource[] res = new PathMatchingResourcePatternResolver().getResources("classpath:*/mapper/**Mapper.xml");
+		Resource[] res = new PathMatchingResourcePatternResolver().getResources("classpath:*/splMap/**Mapper.xml");
 		sessionFactory.setMapperLocations(res);
 		return sessionFactory.getObject();
 	}
