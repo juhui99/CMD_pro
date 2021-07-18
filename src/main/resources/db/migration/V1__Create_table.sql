@@ -1,9 +1,3 @@
-CREATE TABLE `testest` (
-                        `index` int(11) NOT NULL,
-                        `id` varchar(10) DEFAULT NULL,
-                        PRIMARY KEY (`index`)
-)ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
 CREATE TABLE `users` (
                          `user_index` int(11) NOT NULL,
                          `user_id` varchar(10) NOT NULL,

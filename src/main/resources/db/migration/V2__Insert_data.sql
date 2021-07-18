@@ -1,7 +1,3 @@
-insert into testest ( `index`,
-                    `id`)
-values(1, 'juhee');
-
 insert into users ( `user_index`,
                     `user_id`,
                     `user_pwd`,
