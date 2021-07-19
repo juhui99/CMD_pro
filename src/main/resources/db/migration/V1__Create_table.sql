@@ -8,7 +8,7 @@ CREATE TABLE `users` (
                          `user_email` varchar(200) DEFAULT NULL,
                          `user_gender` varchar(20) DEFAULT NULL,
                          `user_profile` varchar(20) DEFAULT NULL,
-                         `user_manage` int NOT NULL DEFAULT 0,
+                         `user_manager` int NOT NULL DEFAULT 0,
                          PRIMARY KEY (`user_index`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
