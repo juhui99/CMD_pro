@@ -1,4 +1,4 @@
-package com.CMD.CMD_pro.user.domain;
+package com.CMD.CMD_pro.user.controller;
 
 import lombok.Getter;
 import lombok.Setter;

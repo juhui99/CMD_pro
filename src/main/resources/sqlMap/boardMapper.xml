@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD MAPPER 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.CMD.CMD_pro.board.mapper.BoardMapper">
+
+    <insert id="boardInsert" parameterType="com.CMD.CMD_pro.board.domain.BoardVO">
+        insert into board_pro
+            values
+        (#{bno},#{subject},#{content},#{writer},now(),0,#{notice},#{kind},#{realm},0,0)
+    </insert>
+
+
+    <select id="boardList" parameterType="map" resultType="com.CMD.CMD_pro.board.domain.BoardVO">
+        select * from board_pro where kind = #{kind} and realm = #{realm} and delete_option = 0 order by notice desc, bno desc limit 20 offset #{off};
+    </select>
+
+    <select id="boardView" parameterType="map" resultType="com.CMD.CMD_pro.board.domain.BoardVO" >
+         select * from board_pro where bno = #{bno} and kind = #{kind} and realm = #{realm}
+    </select>
+
+    <update id="boardUpdate" parameterType="com.CMD.CMD_pro.board.domain.BoardVO">
+        update board_pro set subject = #{subject}, content = #{content}
+        where bno = #{bno} and kind = #{kind} and realm = #{realm}
+    </update>
+
+    <update id="boardDelete" parameterType="map">
+        update board_pro set delete_option = 1 where bno = #{bno} and kind = #{kind} and realm = #{realm} and writer = #{writer}
+    </update>
+
+    <select id="boardSearch" parameterType="map" resultType="com.CMD.CMD_pro.board.domain.BoardVO">
+        select * from board_pro
+
+        <choose >
+            <when test="search_option == 'all'">
+
+                where writer like CONCAT('%',#{keyword},'%')
+                or subject like CONCAT('%',#{keyword},'%')
+                or content like CONCAT('%',#{keyword},'%')
+                and kind = #{kind} and realm = #{realm} order by notice desc, bno desc limit 20 offset #{off}
+            </when>
+            <otherwise>
+                where ${search_option} like CONCAT('%',#{keyword},'%')
+                and kind = #{kind} and realm = #{realm} order by notice desc, bno desc limit 20 offset #{off}
+            </otherwise>
+        </choose>
+    </select>
+
+    <update id="boardHit" parameterType="int">
+        update board_pro set hit = hit + 1 where bno = #{bno}
+    </update>
+
+    <select id="targetPage" parameterType="map" resultType="int">
+        select count(bno) from board_pro where bno >= #{target}
+    </select>
+
+    <select id="boardCount" parameterType="map" resultType="int">
+        select count(*) from board_pro where kind = #{kind} and realm = #{realm}
+    </select>
+
+    <select id="searchCount" parameterType="map" resultType="int">
+        select count(*) from board_pro
+        <choose >
+            <when test="search_option == 'all'">
+
+                where writer like CONCAT('%',#{keyword},'%')
+                or subject like CONCAT('%',#{keyword},'%')
+                or content like CONCAT('%',#{keyword},'%')
+                and kind = #{kind} and realm = #{realm}
+            </when>
+            <otherwise>
+                where ${search_option} like CONCAT('%',#{keyword},'%')
+                and kind = #{kind} and realm = #{realm}
+            </otherwise>
+        </choose>
+    </select>
+
+    <select id="recommendCheck" parameterType="map" resultType="int">
+        select exists (select userID from board_recommend where kind = #{kind} and realm = #{realm} and bno = #{bno} and userID = #{userID}) as success
+    </select>
+
+    <update id="recommendAdd" parameterType="int">
+        update board_pro set recommend = recommend + 1 where bno = #{bno}
+    </update>
+
+    <update id="recommendSubtract" parameterType="int">
+        update board_pro set recommend = recommend - 1 where bno = #{bno}
+    </update>
+
+    <insert id="recommendInsert" parameterType="map">
+        insert into board_recommend
+        values
+        (#{kind},#{realm},#{bno},#{userID})
+    </insert>
+
+    <delete id="recommendDelete" parameterType="map">
+        delete from board_recommend where kind = #{kind} and realm = #{realm} and bno = #{bno} and userID = #{userID}
+    </delete>
+
+    <select id="HotTopicList" parameterType="map" resultType="com.CMD.CMD_pro.board.domain.BoardVO">
+        select * from board_pro where reg_date > DATE_ADD(now(),INTERVAL -24 hour) and kind = #{kind} and realm = #{realm} and delete_option = 0
+        order by hit + recommend desc, bno desc limit 5 offset 0;
+    </select>
+
+    <select id="selectMax" resultType="int">
+        select max(bno) from board_pro;
+    </select>
+    <insert id="fileInsert" parameterType="com.CMD.CMD_pro.board.domain.FileVO">
+        <selectKey keyProperty="bno" resultType="int" order="BEFORE">
+            select max(bno) from board_pro
+        </selectKey>
+        insert into file values (#{f_no},#{bno},#{filename},#{fileoriginname},#{fileurl})
+    </insert>
+
+    <select id="fileDetail" parameterType="int" resultType="com.CMD.CMD_pro.board.domain.FileVO">
+        select * from file where bno = #{bno}
+    </select>
+
+    <delete id="fileDelete" parameterType="int">
+        delete  from file where bno = #{bno}
+    </delete>
+
+    <insert id="fileUpdate" parameterType="com.CMD.CMD_pro.board.domain.FileVO">
+        insert into file value (#{f_no},#{bno},#{filename},#{fileoriginname},#{fileurl})
+    </insert>
+
+    <select id="CommentList" parameterType="int" resultType="com.CMD.CMD_pro.board.domain.CommentVO">
+        select * from comment where bno = #{bno} and delete_option = 0 order by c_sequence desc, c_bno asc
+    </select>
+
+    <select id="CommentCount" parameterType="int" resultType="int">
+        select count(*) from comment where bno = #{bno} and delete_option = 0;
+    </select>
+
+    <insert id="CommentInsert" parameterType="com.CMD.CMD_pro.board.domain.CommentVO">
+        insert into comment values(#{bno},#{c_bno},(select ifnull(max(c_bno)+1,1) from comment a),0,now(),#{writer},#{content},#{delete_option});
+    </insert>
+    
+    <insert id="ReplyInsert" parameterType="com.CMD.CMD_pro.board.domain.CommentVO">
+        insert into comment values(#{bno}, #{c_bno}, #{c_sequence},1,now(),#{writer},#{content},#{delete_option})
+    </insert>
+
+    <update id="CommentUpdate" parameterType="map">
+        update comment set content = #{commentContent} where c_bno = #{commentBno}
+    </update>
+
+    <update id="ReplyDelete" parameterType="int">
+        update comment set delete_option = 1 where c_bno = #{commentBno}
+    </update>
+
+    <update id="CommentDelete" parameterType="int">
+        update comment set delete_option = 1 where c_sequence = #{commentSequence}
+    </update>
+
+    <update id="CommentSetDelete" parameterType="int">
+        update comment set delete_option = 1 where bno = #{bno}
+    </update>
+</mapper>
