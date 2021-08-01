@@ -11,7 +11,7 @@
 <form action="/board" method="post" enctype="multipart/form-data">
     <div class="form-group">
         <label for="writer">작성자</label>
-        <input type="text" id="writer" name="writer" placeholder="이름을 입력하세요">
+        <input type="text" id="writer" name="writer" th:value="${session.id}" readonly>
         <label for="subject">제목</label>
         <input type="text" id="subject" name="subject" placeholder="제목을 입력하세요">
         <label th:if="${user.user_manager == 1}">공지글 여부</label><input th:if="${user.user_manager == 1}" type="checkbox" id="notice" name="notice" value="1" ><br>
