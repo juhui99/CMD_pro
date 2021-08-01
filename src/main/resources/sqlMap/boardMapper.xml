@@ -33,15 +33,14 @@
 
         <choose >
             <when test="search_option == 'all'">
-
-                where writer like CONCAT('%',#{keyword},'%')
-                or subject like CONCAT('%',#{keyword},'%')
-                or content like CONCAT('%',#{keyword},'%')
-                and kind = #{kind} and realm = #{realm} order by notice desc, bno desc limit 20 offset #{off}
+                where (writer like CONCAT('%',#{keyword},'%') and delete_option = 0 and kind = #{kind} and realm = #{realm})
+                or (subject like CONCAT('%',#{keyword},'%') and delete_option = 0 and kind = #{kind} and realm = #{realm})
+                or (content like CONCAT('%',#{keyword},'%') and delete_option = 0 and kind = #{kind} and realm = #{realm})
+                order by notice desc, bno desc limit 20 offset #{off}
             </when>
             <otherwise>
                 where ${search_option} like CONCAT('%',#{keyword},'%')
-                and kind = #{kind} and realm = #{realm} order by notice desc, bno desc limit 20 offset #{off}
+                and kind = #{kind} and realm = #{realm} and delete_option = 0 order by notice desc, bno desc limit 20 offset #{off}
             </otherwise>
         </choose>
     </select>
@@ -55,22 +54,20 @@
     </select>
 
     <select id="boardCount" parameterType="map" resultType="int">
-        select count(*) from board_pro where kind = #{kind} and realm = #{realm}
+        select count(*) from board_pro where kind = #{kind} and realm = #{realm} and delete_option = 0
     </select>
 
     <select id="searchCount" parameterType="map" resultType="int">
         select count(*) from board_pro
         <choose >
             <when test="search_option == 'all'">
-
-                where writer like CONCAT('%',#{keyword},'%')
-                or subject like CONCAT('%',#{keyword},'%')
-                or content like CONCAT('%',#{keyword},'%')
-                and kind = #{kind} and realm = #{realm}
+            where (writer like CONCAT('%',#{keyword},'%') and delete_option = 0 and kind = #{kind} and realm = #{realm})
+            or (subject like CONCAT('%',#{keyword},'%') and delete_option = 0 and kind = #{kind} and realm = #{realm})
+            or (content like CONCAT('%',#{keyword},'%') and delete_option = 0 and kind = #{kind} and realm = #{realm})
             </when>
             <otherwise>
                 where ${search_option} like CONCAT('%',#{keyword},'%')
-                and kind = #{kind} and realm = #{realm}
+                and kind = #{kind} and realm = #{realm} and delete_option = 0
             </otherwise>
         </choose>
     </select>
