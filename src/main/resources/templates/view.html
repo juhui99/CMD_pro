@@ -105,10 +105,10 @@
             type: "POST",
             dataType:"json",
             data: {id: $("#user").val(),
-            recommend: $("#recommend").val(),
-            bno: $("#bno").val(),
-            kind: $("#kind").val(),
-            realm: $("#realm").val()},
+                recommend: $("#recommend").val(),
+                bno: $("#bno").val(),
+                kind: $("#kind").val(),
+                realm: $("#realm").val()},
             success: function (data){
                 $("#is_recommend").text(data);
                 if($("#heart").attr("src")=="/img/heart1.png"){
@@ -157,6 +157,7 @@
                 <a th:if="${session.id == board.writer or user.userManager == 1}" th:href="@{/delete(bno=${board.bno},kind=${board.kind},realm=${board.realm},writer=${board.writer})}"><button type="button">삭제</button></a>
 
 
+
             </form>
 
             </tbody>
@@ -191,9 +192,9 @@
                 <span style="color: grey; font-size: 6px;" th:text="${comment.reg_date}"></span>
             </td>
             <td><a data-toggle="modal" id="modalButton" th:attr="data-id=${comment.c_bno}" class="open-addDialog btn btn-primary" href="#addDialog"><button th:if="${comment.level == 0}" onclick="modalShow();">답글</button></a>
-            <a data-toggle="modal" id="modalButton2" th:data-content="${comment.content}" th:data-bno="${comment.c_bno}" class="open-addDialog2 btn btn-primary" href="#addDialog2"><button th:if="${session.id == comment.writer}">수정</button></a>
-            <a th:if="${session.id == comment.writer and comment.level == 0}" th:href="@{/commentDelete(bno=${board.bno},kind=${board.kind},realm=${board.realm},writer=${comment.writer},commentSequence=${comment.c_sequence})}"><button type="button">삭제</button></a>
-            <a th:if="${session.id == comment.writer and comment.level == 1}" th:href="@{/replyDelete(bno=${board.bno},kind=${board.kind},realm=${board.realm},writer=${comment.writer},commentBno=${comment.c_bno})}"><button type="button">삭제</button></a>
+                <a data-toggle="modal" id="modalButton2" th:data-content="${comment.content}" th:data-bno="${comment.c_bno}" class="open-addDialog2 btn btn-primary" href="#addDialog2"><button th:if="${session.id == comment.writer}">수정</button></a>
+                <a th:if="${session.id == comment.writer and comment.level == 0}" th:href="@{/commentDelete(bno=${board.bno},kind=${board.kind},realm=${board.realm},writer=${comment.writer},commentSequence=${comment.c_sequence})}"><button type="button">삭제</button></a>
+                <a th:if="${session.id == comment.writer and comment.level == 1}" th:href="@{/replyDelete(bno=${board.bno},kind=${board.kind},realm=${board.realm},writer=${comment.writer},commentBno=${comment.c_bno})}"><button type="button">삭제</button></a>
             </td>
 
         </tr>

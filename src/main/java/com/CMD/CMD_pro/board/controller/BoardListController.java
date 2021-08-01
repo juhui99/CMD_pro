@@ -226,6 +226,9 @@ public class BoardListController {
         board.setKind(form.getKind());
         board.setRealm(form.getRealm());
         filename = form.getFilename();
+        if(form.getFilename()==""){
+            filename = "no";
+        }
         model.addAttribute("board",board); //저장된 board 객체를 모델로 담아 update.html로 전달
         model.addAttribute("filename",filename);
         return "update";
@@ -247,7 +250,7 @@ public class BoardListController {
         File destinationFile;
         String destinationFileName;
         String fileUrl = "C:\\test1\\";
-        do{
+        do {
             destinationFileName = RandomStringUtils.randomAlphanumeric(32) + "." + fileNameExtension;
             destinationFile = new File(fileUrl + destinationFileName);
 
@@ -259,11 +262,16 @@ public class BoardListController {
         file.setFilename(destinationFileName);
         file.setFileoriginname(fileName);
         file.setFileurl(fileUrl);
+        if(boardMapper.fileDetail(bno) != null) {
+            boardMapper.fileDelete(bno);
+        }
         boardMapper.fileUpdate(file);
+
         redirect.addAttribute("kind", form.getKind());
         redirect.addAttribute("realm", form.getRealm());
         return "redirect:/board"; //("/board")로 매핑된 get메소드 실행
     }
+
 
     @GetMapping("/delete")  //글 삭제
     public String BoardDelete(@RequestParam("bno") int bno, @RequestParam("kind") String kind, @RequestParam("realm") String realm, @RequestParam("writer") String writer, Model model, HttpSession session) throws Exception{
