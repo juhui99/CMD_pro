@@ -176,8 +176,10 @@ public class BoardListController {
     }
 
     @GetMapping("/view")    //글 상세보기
-    public String BoardView(@RequestParam("bno") int bno, @RequestParam("kind") String kind, @RequestParam("realm") String realm, Model model, HttpSession session) throws Exception{
+    public String BoardView(@RequestParam("bno") int bno, @RequestParam("kind") String kind, @RequestParam("realm") String realm, Model model, HttpSession session,HttpServletRequest request) throws Exception{
         String userID = (String)session.getAttribute("id");
+        String pageNumber = null;
+        pageNumber = request.getParameter("pageNumber");
         if(userID == null){
             model.addAttribute("msg","로그인이 되어있지 않습니다.");
             model.addAttribute("url","login"); //메세지와 url을 모델로 담아 알림창을 띄울 alert.html로 전달
@@ -205,6 +207,9 @@ public class BoardListController {
         int commentCount = boardMapper.CommentCount(bno);
         model.addAttribute("commentCount",commentCount);
         model.addAttribute("commentList",commentList);
+        model.addAttribute("page",pageNumber);
+        model.addAttribute("kind",kind);
+        model.addAttribute("realm",realm);
 
         return "view";
 
@@ -489,8 +494,10 @@ public class BoardListController {
         boardMapper.fileDelete(bno);
     }
 
-    @PostMapping("/commentInsert")
+    @PostMapping("/commentInsert") //댓글등록
     public String commentInsert(CommentForm form, RedirectAttributes redirect) throws Exception{
+        String pageNumber = null;
+        pageNumber = form.getPageNumber();
         CommentVO comment = new CommentVO();
         comment.setBno(form.getBoard_bno());
         comment.setWriter(form.getComment_writer());
@@ -499,12 +506,16 @@ public class BoardListController {
         redirect.addAttribute("bno",form.getBoard_bno());
         redirect.addAttribute("kind",form.getBoard_kind());
         redirect.addAttribute("realm",form.getBoard_realm());
+        redirect.addAttribute("pageNumber",pageNumber);
+
        return "redirect:/view";
     }
 
 
-    @PostMapping("/replyInsert")
+    @PostMapping("/replyInsert") //대댓글 등록
     public String replyInsert(CommentForm form, RedirectAttributes redirect) throws Exception{
+        String pageNumber = null;
+        pageNumber = form.getPageNumber();
         CommentVO comment = new CommentVO();
         comment.setBno(form.getBoard_bno());
         comment.setC_sequence(form.getC_sequence());
@@ -514,12 +525,15 @@ public class BoardListController {
         redirect.addAttribute("bno",form.getBoard_bno());
         redirect.addAttribute("kind",form.getBoard_kind());
         redirect.addAttribute("realm",form.getBoard_realm());
+        redirect.addAttribute("pageNumber",pageNumber);
         return "redirect:/view";
     }
 
 
-    @PostMapping("/commentUpdate")
+    @PostMapping("/commentUpdate") //댓글 대댓글수정
     public String commentUpdate(CommentForm form, RedirectAttributes redirect) throws Exception{
+        String pageNumber = null;
+        pageNumber = form.getPageNumber();
         int commentBno = 0;
         String commentContent = null;
         commentBno = form.getC_bno();
@@ -528,11 +542,15 @@ public class BoardListController {
         redirect.addAttribute("bno",form.getBoard_bno());
         redirect.addAttribute("kind",form.getBoard_kind());
         redirect.addAttribute("realm",form.getBoard_realm());
+        redirect.addAttribute("pageNumber",pageNumber);
         return "redirect:/view";
     }
 
     @GetMapping("/replyDelete")  //대댓글 삭제
-    public String replyDelete(@RequestParam("bno") int bno, @RequestParam("kind") String kind, @RequestParam("realm") String realm, @RequestParam("writer") String writer,@RequestParam("commentBno") int commentBno, Model model, HttpSession session, RedirectAttributes redirect) throws Exception{
+    public String replyDelete(@RequestParam("bno") int bno, @RequestParam("kind") String kind, @RequestParam("realm") String realm, @RequestParam("writer") String writer,@RequestParam("commentBno") int commentBno, Model model, HttpSession session, RedirectAttributes redirect,HttpServletRequest request) throws Exception{
+        String pageNumber = null;
+        pageNumber = request.getParameter("pageNumber");
+
         String userID = (String)session.getAttribute("id");
         if(!userID.equals(writer)){
             model.addAttribute("msg","접근할 수 없습니다.");
@@ -543,12 +561,15 @@ public class BoardListController {
         redirect.addAttribute("bno",bno);
         redirect.addAttribute("kind",kind);
         redirect.addAttribute("realm",realm);
+        redirect.addAttribute("pageNumber",pageNumber);
         return "redirect:/view";
 
     }
 
-    @GetMapping("/commentDelete")  //대댓글 삭제
-    public String commentDelete(@RequestParam("bno") int bno, @RequestParam("kind") String kind, @RequestParam("realm") String realm, @RequestParam("writer") String writer,@RequestParam("commentSequence") int commentSequence, Model model, HttpSession session, RedirectAttributes redirect) throws Exception{
+    @GetMapping("/commentDelete")  //댓글 삭제
+    public String commentDelete(@RequestParam("bno") int bno, @RequestParam("kind") String kind, @RequestParam("realm") String realm, @RequestParam("writer") String writer,@RequestParam("commentSequence") int commentSequence, Model model, HttpSession session, RedirectAttributes redirect,HttpServletRequest request) throws Exception{
+        String pageNumber = null;
+        pageNumber = request.getParameter("pageNumber");
         String userID = (String)session.getAttribute("id");
         if(!userID.equals(writer)){
             model.addAttribute("msg","접근할 수 없습니다.");
@@ -559,6 +580,7 @@ public class BoardListController {
         redirect.addAttribute("bno",bno);
         redirect.addAttribute("kind",kind);
         redirect.addAttribute("realm",realm);
+        redirect.addAttribute("pageNumber",pageNumber);
         return "redirect:/view";
 
     }

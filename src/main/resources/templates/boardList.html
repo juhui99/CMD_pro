@@ -251,7 +251,7 @@
             </thead>
             <tbody>
             <tr th:each="board : ${board}">
-                <td><a th:href="@{/view(bno=${board.bno},kind=${kind},realm=${realm})}" th:text="${board.subject}"></a></td>
+                <td><a th:href="@{/view(bno=${board.bno},kind=${kind},realm=${realm},pageNumber=${page})}" th:text="${board.subject}"></a></td>
                 <td th:text="${board.writer}"></td>
                 <td th:text="${board.reg_date}"></td>
                 <td th:if="${board.notice == 1}" style="color: red;">공지글</td>
