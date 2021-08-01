@@ -51,7 +51,6 @@ public class UserController {
         String userPassword = form.getUser_pwd();
         System.out.println(userID);
         UserVO user = userMapper.userLogin(userID);
-        System.out.println(user.getUser_id());
         if(user != null){
             if(user.getUser_pwd().equals(userPassword)){
                 HttpSession session = request.getSession();

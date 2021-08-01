@@ -121,7 +121,7 @@ public class BoardListController {
         if(notice == null){
             board.setNotice(0);
         } else{
-            if(user.getUserManager()==1){
+            if(user.getUser_manager()==1){
                 board.setNotice(Integer.parseInt(notice));
             }
             else{
@@ -277,7 +277,7 @@ public class BoardListController {
     public String BoardDelete(@RequestParam("bno") int bno, @RequestParam("kind") String kind, @RequestParam("realm") String realm, @RequestParam("writer") String writer, Model model, HttpSession session) throws Exception{
         String userID = (String)session.getAttribute("id");
         UserVO user = userMapper.userLogin(userID);
-        if(!userID.equals(writer) && user.getUserManager()==0){
+        if(!userID.equals(writer) && user.getUser_manager()==0){
             model.addAttribute("msg","접근할 수 없습니다.");
             model.addAttribute("url","board?kind="+kind+"&realm="+realm);
             return "alert";

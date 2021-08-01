@@ -154,7 +154,7 @@
                 <input type="hidden" name="filename" id="filename" th:value="${file.fileoriginname}">
                 <a href="javascript:history.back()"><button type="button" >목록</button></a>
                 <button th:if="${session.id == board.writer}" type="submit">수정</button>
-                <a th:if="${session.id == board.writer or user.userManager == 1}" th:href="@{/delete(bno=${board.bno},kind=${board.kind},realm=${board.realm},writer=${board.writer})}"><button type="button">삭제</button></a>
+                <a th:if="${session.id == board.writer or user.user_manager == 1}" th:href="@{/delete(bno=${board.bno},kind=${board.kind},realm=${board.realm},writer=${board.writer})}"><button type="button">삭제</button></a>
 
 
 
