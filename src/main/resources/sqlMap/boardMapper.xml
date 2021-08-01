@@ -100,7 +100,7 @@
     </select>
 
     <select id="selectMax" resultType="int">
-        select max(bno) from board_pro;
+        select ifnull(max(bno),0) from board_pro;
     </select>
     <insert id="fileInsert" parameterType="com.CMD.CMD_pro.board.domain.FileVO">
         <selectKey keyProperty="bno" resultType="int" order="BEFORE">
