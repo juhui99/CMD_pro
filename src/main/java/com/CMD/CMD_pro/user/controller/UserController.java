@@ -25,11 +25,11 @@ public class UserController {
         UserVO user = new UserVO();
         user.setUser_id(form.getUser_id());
         user.setUser_pwd(form.getUser_pwd());
-        user.setUserName(form.getUser_name());
-        user.setUserAge(form.getUser_age());
-        user.setUserMajor(form.getUser_major());
-        user.setUserEmail(form.getUser_email());
-        user.setUserGender(form.getUser_gender());
+        user.setUser_name(form.getUser_name());
+        user.setUser_age(form.getUser_age());
+        user.setUser_major(form.getUser_major());
+        user.setUser_email(form.getUser_email());
+        user.setUser_gender(form.getUser_gender());
         userMapper.userJoin(user);
         return "redirect:/join";
     }
