@@ -19,7 +19,6 @@ insert into users ( `user_id`,
                     `user_profile`)
 values('bbbb', '1b1b','김주희', '23', '백앤드', 'bbbb@gmail.com', 'W', 'profile');
 
-
 insert into survey (`user_index`,
                     `survey_title`,
                     `survey_duplicate`)
@@ -48,7 +47,6 @@ values('글제목','글내용1입니다.','ehfehfdl0927',now(),0,0,'자유게시
 
 
 
-
 -- insert into survey_item ( `survey_item_index`,
 --                     `survey_index`,
 --                     `survey_item_content`)
@@ -58,3 +56,15 @@ values('글제목','글내용1입니다.','ehfehfdl0927',now(),0,0,'자유게시
 --                     `survey_item_index`,
 --                     `survey_result`,
 --                     `survey_result_reg_date`)
+
+-- insert into `board` (`board_subject`,
+--                      `board_content`,
+--                      `board_writer`,
+--                      `board_date`,
+--                      `board_hit`,
+--                      `board_notice`,
+--                      `board_kind`,
+--                      `board_realm`,
+--                      `board_recommend`,
+--                      `board_delete_option`)
+-- values('글제목','글내용','ehfehfdl0927',now(),0,0,'자유게시판','백엔드',0,0);

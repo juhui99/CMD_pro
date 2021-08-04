@@ -40,6 +40,21 @@ CREATE TABLE `survey` (
 #                           PRIMARY KEY (`survey_result_index`)
 # ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+# CREATE TABLE `board` (
+#                        `board_index` int NOT NULL AUTO_INCREMENT,
+#                        `board_subject` varchar(50),
+#                        `board_content` text,
+#                        `board_writer` varchar (50) NOT NULL,
+#                        `board_date` datetime NOT NULL,
+#                        `board_hit` int NOT NULL DEFAULT 0,
+#                        `board_notice` int NOT NULL DEFAULT 0,
+#                        `board_kind` varchar(20),
+#                        `board_realm` varchar(20),
+#                        `board_recommend` int NOT NULL DEFAULT 0,
+#                        `board_delete_option` int NOT NULL DEFAULT 0,
+#                        PRIMARY KEY (board_index)
+# ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
  CREATE TABLE `board_pro` (
      `bno` int NOT NULL AUTO_INCREMENT,
      `subject` varchar(50),

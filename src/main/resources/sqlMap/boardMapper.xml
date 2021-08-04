@@ -6,7 +6,7 @@
 
     <insert id="boardInsert" parameterType="com.CMD.CMD_pro.board.domain.BoardVO">
         insert into board_pro
-            values
+        values
         (#{bno},#{subject},#{content},#{writer},now(),0,#{notice},#{kind},#{realm},0,0)
     </insert>
 
@@ -16,7 +16,7 @@
     </select>
 
     <select id="boardView" parameterType="map" resultType="com.CMD.CMD_pro.board.domain.BoardVO" >
-         select * from board_pro where bno = #{bno} and kind = #{kind} and realm = #{realm}
+        select * from board_pro where bno = #{bno} and kind = #{kind} and realm = #{realm}
     </select>
 
     <update id="boardUpdate" parameterType="com.CMD.CMD_pro.board.domain.BoardVO">
@@ -61,9 +61,9 @@
         select count(*) from board_pro
         <choose >
             <when test="search_option == 'all'">
-            where (writer like CONCAT('%',#{keyword},'%') and delete_option = 0 and kind = #{kind} and realm = #{realm})
-            or (subject like CONCAT('%',#{keyword},'%') and delete_option = 0 and kind = #{kind} and realm = #{realm})
-            or (content like CONCAT('%',#{keyword},'%') and delete_option = 0 and kind = #{kind} and realm = #{realm})
+                where (writer like CONCAT('%',#{keyword},'%') and delete_option = 0 and kind = #{kind} and realm = #{realm})
+                or (subject like CONCAT('%',#{keyword},'%') and delete_option = 0 and kind = #{kind} and realm = #{realm})
+                or (content like CONCAT('%',#{keyword},'%') and delete_option = 0 and kind = #{kind} and realm = #{realm})
             </when>
             <otherwise>
                 where ${search_option} like CONCAT('%',#{keyword},'%')
@@ -87,7 +87,7 @@
     <insert id="recommendInsert" parameterType="map">
         insert into board_recommend
         values
-        (#{kind},#{realm},#{bno},#{userID})
+            (#{kind},#{realm},#{bno},#{userID})
     </insert>
 
     <delete id="recommendDelete" parameterType="map">
@@ -132,7 +132,7 @@
     <insert id="CommentInsert" parameterType="com.CMD.CMD_pro.board.domain.CommentVO">
         insert into comment values(#{bno},#{c_bno},(select ifnull(max(c_bno)+1,1) from comment a),0,now(),#{writer},#{content},#{delete_option});
     </insert>
-    
+
     <insert id="ReplyInsert" parameterType="com.CMD.CMD_pro.board.domain.CommentVO">
         insert into comment values(#{bno}, #{c_bno}, #{c_sequence},1,now(),#{writer},#{content},#{delete_option})
     </insert>

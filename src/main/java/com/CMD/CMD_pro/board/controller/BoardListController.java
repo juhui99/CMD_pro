@@ -33,8 +33,8 @@ public class BoardListController {
 
     //@RequestMapping("/board") //게시물 리스트 가져오기 글목록
     //public List<BoardVO> board() throws Exception{
-       // List<BoardVO> board = boardMapper.boardList(); //게시물 메퍼에 boardList 메소드 실행후 결과 담기
-       // return board;
+    // List<BoardVO> board = boardMapper.boardList(); //게시물 메퍼에 boardList 메소드 실행후 결과 담기
+    // return board;
     //}
 
     @GetMapping("/board")  //게시물 리스트 가져오기 get방식
@@ -125,9 +125,9 @@ public class BoardListController {
                 board.setNotice(Integer.parseInt(notice));
             }
             else{
-              model.addAttribute("msg","관리자 권한이 없습니다.");
-              model.addAttribute("url","board?kind="+form.getKind()+"&realm="+form.getRealm());
-              return "alert";
+                model.addAttribute("msg","관리자 권한이 없습니다.");
+                model.addAttribute("url","board?kind="+form.getKind()+"&realm="+form.getRealm());
+                return "alert";
             }
         }
         board.setKind(form.getKind());
@@ -135,18 +135,18 @@ public class BoardListController {
 
         boardMapper.boardInsert(board);
 
-            String fileName = files.getOriginalFilename();
-            String fileNameExtension = FilenameUtils.getExtension(fileName).toLowerCase();
-            File destinationFile;
-            String destinationFileName;
-            String fileUrl = "C:\\test1\\";
-            do{
+        String fileName = files.getOriginalFilename();
+        String fileNameExtension = FilenameUtils.getExtension(fileName).toLowerCase();
+        File destinationFile;
+        String destinationFileName;
+        String fileUrl = "C:\\test1\\";
+        do{
             destinationFileName = RandomStringUtils.randomAlphanumeric(32) + "." + fileNameExtension;
             destinationFile = new File(fileUrl + destinationFileName);
 
-            } while (destinationFile.exists());
-            destinationFile.getParentFile().mkdirs();
-            files.transferTo(destinationFile);
+        } while (destinationFile.exists());
+        destinationFile.getParentFile().mkdirs();
+        files.transferTo(destinationFile);
         FileVO file = new FileVO();
         file.setBno(board_bno);
         file.setFilename(destinationFileName);
@@ -158,6 +158,7 @@ public class BoardListController {
         redirect.addAttribute("realm", form.getRealm());
         return "redirect:/board";
     }
+
     @GetMapping("/write")                  //글쓰기
     public String write(@RequestParam("kind") String kind, @RequestParam("realm") String realm, Model model, HttpSession session) throws Exception{
         String id = (String) session.getAttribute("id");
@@ -212,7 +213,6 @@ public class BoardListController {
         model.addAttribute("realm",realm);
 
         return "view";
-
     }
 
     @PostMapping("/update")    //글 수정
@@ -292,7 +292,6 @@ public class BoardListController {
         model.addAttribute("msg","글을 삭제하였습니다.");
         model.addAttribute("url","board?kind="+kind+"&realm="+realm); //메세지와 url을 모델로 담아 알림창을 띄울 alert.html로 전달
         return "alert";
-
     }
 
     @PostMapping("/search_list")  //글 검색
@@ -477,14 +476,12 @@ public class BoardListController {
                 out.println("<script> alert('파일을 찾을 수 없습니다.'); history.back(); </script>");
                 out.flush();
             }
-
             in.close();
             os.close();
 
         } catch (Exception e) {
             System.out.println("ERROR : " + e.getStackTrace());
         }
-
     }
 
     @ResponseBody
@@ -508,9 +505,8 @@ public class BoardListController {
         redirect.addAttribute("realm",form.getBoard_realm());
         redirect.addAttribute("pageNumber",pageNumber);
 
-       return "redirect:/view";
+        return "redirect:/view";
     }
-
 
     @PostMapping("/replyInsert") //대댓글 등록
     public String replyInsert(CommentForm form, RedirectAttributes redirect) throws Exception{
@@ -528,7 +524,6 @@ public class BoardListController {
         redirect.addAttribute("pageNumber",pageNumber);
         return "redirect:/view";
     }
-
 
     @PostMapping("/commentUpdate") //댓글 대댓글수정
     public String commentUpdate(CommentForm form, RedirectAttributes redirect) throws Exception{
@@ -563,7 +558,6 @@ public class BoardListController {
         redirect.addAttribute("realm",realm);
         redirect.addAttribute("pageNumber",pageNumber);
         return "redirect:/view";
-
     }
 
     @GetMapping("/commentDelete")  //댓글 삭제
@@ -582,8 +576,5 @@ public class BoardListController {
         redirect.addAttribute("realm",realm);
         redirect.addAttribute("pageNumber",pageNumber);
         return "redirect:/view";
-
     }
-
-
 }
