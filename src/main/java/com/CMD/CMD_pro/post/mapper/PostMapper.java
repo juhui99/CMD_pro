@@ -7,6 +7,24 @@ import java.util.List;
 
 @Repository
 public interface PostMapper {
+
     public List<PostVO> selectPostList() throws Exception;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 }

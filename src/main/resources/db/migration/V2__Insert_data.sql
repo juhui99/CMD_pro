@@ -25,6 +25,29 @@ insert into survey (`user_index`,
                     `survey_duplicate`)
 values(0, '많이 사용하는 언어',2);
 
+insert into board_pro (`subject`,
+                       `content`,
+                       `writer`,
+                       `reg_date`,
+                       `hit`,
+                       `notice`,
+                       `kind`,
+                       `realm`,
+                       `recommend`,
+                       `delete_option`)
+values('글제목','글내용1입니다.','ehfehfdl0927',now(),0,0,'자유게시판','백엔드',0,0);
+
+
+
+
+
+
+
+
+
+
+
+
 
 -- insert into survey_item ( `survey_item_index`,
 --                     `survey_index`,
