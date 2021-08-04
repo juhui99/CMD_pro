@@ -10,7 +10,6 @@
         (#{bno},#{subject},#{content},#{writer},now(),0,#{notice},#{kind},#{realm},0,0)
     </insert>
 
-
     <select id="boardList" parameterType="map" resultType="com.CMD.CMD_pro.board.domain.BoardVO">
         select * from board_pro where kind = #{kind} and realm = #{realm} and delete_option = 0 order by notice desc, bno desc limit 20 offset #{off};
     </select>

@@ -1,6 +1,5 @@
 package com.CMD.CMD_pro.board.controller;
 
-
 import com.CMD.CMD_pro.board.domain.BoardVO;
 import com.CMD.CMD_pro.board.domain.CommentVO;
 import com.CMD.CMD_pro.board.domain.FileVO;
