@@ -19,6 +19,7 @@ CREATE TABLE `survey` (
                          `survey_content` varchar(1000) DEFAULT NULL,
                          `survey_reg_date` datetime NOT NULL DEFAULT NOW(),
                          `survey_end_date` datetime DEFAULT NULL,
+                         `progressing` int NOT NULL,
                          `survey_count` int DEFAULT NULL,
                          `survey_duplicate` int DEFAULT NULL,
                          PRIMARY KEY (`survey_index`)
