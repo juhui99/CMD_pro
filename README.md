@@ -1,5 +1,4 @@
 # CMD_PRO
-이거 왜 안댔지 흠...
 
 졸업 논문
 ## Synopsys
