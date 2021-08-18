@@ -118,7 +118,7 @@ public class SurveyController {
         SurveyVO surveyVO = new SurveyVO();
         SurveyWithItemVO surveyWithItemVO = new SurveyWithItemVO();
 
-        String pattern = "yyyy/MM/dd";
+        String pattern = "yyyy-MM-dd";
         SimpleDateFormat sdf = new SimpleDateFormat(pattern);
         surveyVO.setSurveyEnd(sdf.parse(surveyEnd));
         surveyVO.setSurveyTitle(surveyTitle);

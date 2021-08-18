@@ -3,18 +3,12 @@ package com.CMD.CMD_pro.survey.service.servicempl;
 import com.CMD.CMD_pro.survey.domain.*;
 import com.CMD.CMD_pro.survey.mapper.SurveyMapper;
 import com.CMD.CMD_pro.survey.service.SurveyService;
-import org.apache.ibatis.session.SqlSession;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
 import java.util.List;
 
-@Service("surveyService")
 public class SurveyServicempl implements SurveyService {
 
     @Autowired
