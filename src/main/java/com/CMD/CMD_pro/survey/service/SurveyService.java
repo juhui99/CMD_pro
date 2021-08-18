@@ -14,8 +14,7 @@ public interface SurveyService {
     public SurveyVO getSurvey(int surveyIndex) throws Exception;
     public SurveyWithItemVO getSurveyItems(int surveyIndex) throws Exception;
     public SurveyWithDatasetVO getSurveyResult(int surveyIndex) throws Exception;
- //   public void insertSurvey(SurveyVO surveyVO);
- //   public void addSurvey(SurveyVO svo, SurveyWithItemVO sivo);
+    public void addSurvey(SurveyVO surveyVO, SurveyWithItemVO surveyWithItemVO);
     public void	closeSurvey(int surveyIndex);
     public void removeSurvey(int surveyIndex);
     public void addSurveyResult(SurveyResultVO srvo);

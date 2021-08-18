@@ -59,9 +59,9 @@ public class SurveyMappermpl implements SurveyMapper{
     }
 
     @Override
-    public void insertSurvey(SurveyVO svo) {
+    public void insertSurvey(SurveyVO surveyVO) {
         logger.info("addSurvey");
-        sqlSession.insert(namespace+".insertSurvey", svo);
+        sqlSession.insert(namespace+".insertSurvey", surveyVO);
         System.out.println("addsurvey 성공");
     }
 

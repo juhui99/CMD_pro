@@ -21,8 +21,8 @@ public class SurveyController {
 
 //    @Autowired
 //    private SurveyVO surveyVO;
-    @Autowired
-    private UserService userService;
+//    @Autowired
+//    private UserService userService;
     @Autowired
     private SurveyService surveyService;
 
@@ -131,7 +131,7 @@ public class SurveyController {
             surveyItemList.add(temp);
         }
         surveyWithItemVO.setSurveyItemList(surveyItemList);
-        surveyService.insertSurvey(surveyVO);
+        surveyService.addSurvey(surveyVO,surveyWithItemVO);
 
         return "redirect:/survey/main";
     }

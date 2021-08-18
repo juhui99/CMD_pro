@@ -43,15 +43,21 @@ public class SurveyServicempl implements SurveyService {
 //		surveyWithItemVO.setMySurvey(dao.selecyMySurveyResult(survey_seq, member_seq));
         return surveyWithItemVO;
     }
+    @Override
+    public void addSurvey(SurveyVO surveyVO, SurveyWithItemVO surveyWithItemVO) {
+        surveyMapper.insertSurvey(surveyVO);
+        surveyMapper.insertSurveyItem(surveyWithItemVO.getSurveyItemList());
+    }
 
     @Override
-    public SurveyWithDatasetVO getSurveyResult(int survey_seq) throws Exception {
-        SurveyWithItemVO surveyWithItemVO = getSurveyItems(survey_seq);
+    public SurveyWithDatasetVO getSurveyResult(int surveyIndex) throws Exception {
+        SurveyWithItemVO surveyWithItemVO = getSurveyItems(surveyIndex);
         SurveyWithDatasetVO surveyWithDatasetVO = new SurveyWithDatasetVO(surveyWithItemVO);
-        List<ResultDataSet> dataSetList = surveyMapper.selectSurveyResultDataSet(survey_seq);
+        List<ResultDataSet> dataSetList = surveyMapper.selectSurveyResultDataSet(surveyIndex);
         surveyWithDatasetVO.setDataset(dataSetList);
         return surveyWithDatasetVO;
     }
+
     // 설문조사 보기 선택
     @Override
     public void addSurveyResult(SurveyResultVO srvo) {
@@ -64,13 +70,13 @@ public class SurveyServicempl implements SurveyService {
         return list;
     }
     @Override
-    public void closeSurvey(int survey_seq) {
-        surveyMapper.closeSurvey(survey_seq);
+    public void closeSurvey(int surveyIndex) {
+        surveyMapper.closeSurvey(surveyIndex);
     }
 
     @Override
-    public void removeSurvey(int survey_seq) {
-        surveyMapper.removeSurvey(survey_seq);
+    public void removeSurvey(int surveyIndex) {
+        surveyMapper.removeSurvey(surveyIndex);
     }
 
 
